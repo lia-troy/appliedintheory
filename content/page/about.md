@@ -1,7 +1,7 @@
 ---
-title: "About"
+title: "About me"
 date: 2022-05-31T10:03:22+03:00
-draft: true
+draft: false
 excludeFromTopNav: false
 
 # set the link if you want to redirect the user.
@@ -10,9 +10,7 @@ link: ""
 target: "_blank"
 ---
 
-Mathemetician converting to software engineering. Making math accessible to engineers.
-
+Hi, I'm Lia, a mathematician converting to software engineering.
 I have a Bachelor's in Mathematics from the University of Chicago.
-
-Currently working at NextSilicon on embedded algorithms for compilers.
+I'm currently working at NextSilicon on embedded algorithms for compilers.
 
