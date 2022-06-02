@@ -1,0 +1,41 @@
+name: CI
+on:
+  push:
+    branches:
+      - dev
+  pull_request:
+    branches:
+      - dev
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+
+      - name: Update theme
+        run: git submodule update --init --recursive
+
+      - name: Setup hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugoVersion: extended_0.97.0
+
+      - name: Build
+        # remove --minify tag if you do not need it
+        # docs: https://gohugo.io/hugo-pipes/minification/
+        run: hugo
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{ secrets.GITACTION }}
+          external_repository: lia-troy/lia-troy.github.io
+          publish_dir: ./public
+          #   keep_files: true
+          user_name: lia-troy
+          user_email: lia.troy1@gmail.com
+          publish_branch: main
+          cname: www.appliedintheory.com
