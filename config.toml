@@ -84,7 +84,7 @@ disqusShortname = ""
     customImage = "/profile-img.jpg"
 
     # define the icon you want to use for the overlay for the customImage or avatar.
-    overlayIcon = "fa-home"
+    overlayIcon = false
 
     # always display the top navigation (with pages and search) on non-mobile screens
     permanentTopNav = false
