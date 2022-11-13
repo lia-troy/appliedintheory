@@ -8,8 +8,8 @@ toc: false
 author: "Lia Troy"
 ---
 
-Luckily, some systems can be easily identified as stable.
-In these cases we can easily find hints that indicate that we can sleep easily at night knowing
+Some systems can be easily identified as stable, and not chaotic.
+In these special cases we can easily find hints that indicate that we can sleep easily at night knowing
 that our system is well behaved.
 
 ![Image by Olav Ahrens Rotne on Unsplash](/dynamics/rubiks-easy-stability.jpg)
@@ -20,6 +20,10 @@ We're going to look at a few types of stable dynamics that are very good indicat
 what we expect is actually happening.
 
 <!--more-->
+
+A system is a function, along with a defined set of inputs.
+This is an important definition, since the same function may exhibit completely different behaviour
+if the input set changes.
 
 ## Monotone functions
 
@@ -82,24 +86,31 @@ The simulation has reached stability.
 ## Convex functions
 
 The subject of convexity is an entire university course, but for our purposes we don't have to go that far.
-A system is convex if it has a unique minimum or maximum point.
+Technically, a system is convex if it has a unique minimum point and no maxima.
+However, we extend the defintion to also include functions that have one maximum point and no minima.
+We can reuse all of the same reasoning, since if $f$ has one unique maximum and no minimum,
+then $-f$ is convex, and we can continue with our analysis.
+
 The functions $x^2$ and phone charging are convex systems;
 the functions $x^4 - x^2$ and finding the shortest route on Google maps are not
 (there can be two distinct shortest paths).
 
-The amazing thing about convex systems is that there is always one clear answer.
+The amazing thing about convex systems is that there is always one clear solution.
 As long as you choose an error margin that is appropriate for the problem, you should be good to go.
 
 ![Image by Alex Krum on Unsplash](/dynamics/sand-dune-peak.jpeg)
 
 A lot of algorithms assume that the system they are being used on is convex.
 The easiest example is gradient descent, which by definition only finds local minima.
-If your local minimum isn't guaranteed to also be global, you could be in for a world of hurt.
+If your system isn't convex, then you have no guarantee that your local minimum
+is also the global minimum, and you could be in for a world of hurt.
 
-As a result of this, most machine learning algorithms also require convexity.
+Most machine learning algorithms also require convexity.
 ML can achieve incredible results, but behind the scenes they often rely on gradient descent.
 In particular, neural nets are nearly always trained using gradient descent.
 Unfortunately, depending on the data, it can be difficulty to test for convexity.
+Collecting good data is incredibly difficult, and it is possible that the training data does not
+contain the true global minimum.
 
 ## Linear systems
 
