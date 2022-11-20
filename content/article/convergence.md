@@ -35,16 +35,15 @@ Just to make our lives easier, let's use the notation $f \circ f(x)$ to mean $f(
 Fixed points are really simple: they are inputs that are unchanged by the function.
 For example, $0$ is a fixed point of $x^2$ since $0^2 = 0$.
 Here's another few examples:
-1. $1$ is a fixed point of $\frac {1} {x}$.
-2. In $y = x$, every point is a fixed point.
-3. In the logistic map $3.95 \cdot p \cdot (1 - p)$, 0 is a fixed point.
-4. 100\% is the fixed point of charging your phone.
-5. \$0 is the fixed point of earning interest.
+1. In $y = x$, every point is a fixed point.
+2. In the logistic map $3.95 \cdot p \cdot (1 - p)$, 0 is a fixed point.
+3. 100\% is the fixed point of charging your phone.
+4. \$0 is the fixed point of earning interest.
 
 The formal definition of a fixed point is:  
 *If $f(x) = x$, then $x$ is a fixed point for the function $f$.*
 
-The five examples listed above actually exhibit different types of fixed point dynamics.
+The four examples listed above actually exhibit different types of fixed point dynamics.
 As we learn about the different types, we will use these examples to show the differences.
 
 #### Red herring: Attracting fixed points
@@ -63,20 +62,17 @@ Intuitively, this sounds like convergence, with multiple inputs leading to the s
 
 Let's see how it plays out in our examples, and whether this is a good enough definition of convergence:
 
-1. $\ f = \frac {1} {x}$:
-   This is not an attracting fixed point.
-   1 is the only input such that $\quad f(1) = \frac {1} {1} = 1$.
-2. $\ f(x) = x$: Every point is a fixed point, but none of them are attracting.
-3. $\ f(p) = 3.95 \cdot p \cdot (1 - p)$: 0 is an attracting fixed point, since $f(1) = f(0) = 0$.
-4. Phone charging: 100\% is an attracting fixed point.
+1. $\ f(x) = x$: Every point is a fixed point, but none of them are attracting.
+2. $\ f(p) = 3.95 \cdot p \cdot (1 - p)$: 0 is an attracting fixed point, since $f(1) = f(0) = 0$.
+3. Phone charging: 100\% is an attracting fixed point.
    Charging from 99\% gives 100\%.
-5. Earning interest: \$0 is not attracting.
+4. Earning interest: \$0 is not attracting.
    You can't earn interest from some money and end up with no money.
 
 These examples are just all over the map.
 
 Some systems, like earning interest, really feel pretty stable, but aren't attracting.
-The logistic map in example 3 is completely wacky.
+The logistic map in example 2 is completely wacky.
 It has an attracting fixed point,
 but in the chaos 101 post, we saw that it is actually chaotic almost everywhere else.
 
@@ -113,20 +109,15 @@ $f$ converges for engineers if for $x, y \in U$ and $|x - y| \lt \varepsilon$,
 we have $|f \circ f \circ \dots \circ f(x) - f \circ f \circ \dots \circ f(y)| \lt \varepsilon$.*  
 Recall that $f \circ f(x) = f(f(x))$.
 
-Let's look at our five systems, and which ones converge from an engineering perspective:
-1. $f = \frac {1} {x}$:
-   For $x \lt 1$, the system does not converge.
-   But... for $x \gt 1$, the system definitely converges.
-   Given enough iterations, all points approach 0,
-   which definitely means the outputs get closer to each other over time.
-2. $f(x) = x$: Definitely converges.
+Let's look at our four systems, and which ones converge from an engineering perspective:
+1. $f(x) = x$: Definitely converges.
    Two points that start off close together stay close together because ... well ... they just don't move.
-3. $f(p) = 3.95 \cdot p \cdot (1 - p)$: Here it really matters what the possible inputs are.
+2. $f(p) = 3.95 \cdot p \cdot (1 - p)$: Here it really matters what the possible inputs are.
    If we know for a fact that we only put 0 or 1 as an input, then sure, it converges.
    But, if we are choosing input from around 0.3, as we know, the system is chaotic.
-4. Phone charging: Converges!
+3. Phone charging: Converges!
    Eventually all points end up at 100\% anyway, and points stay close together over time.
-5. Earning interest: Here is where we REALLY care about $N$.
+4. Earning interest: Here is where we REALLY care about $N$.
    Normally, the same input doesn't earn interest for millions of iterations.
    Moreover, there are usually upper bounds on the inputs.
    Even though earning interest is exponential, if you know you won't have more than a couple thousand iterations,
@@ -167,8 +158,7 @@ flip the input from negative to positive.
 All of a sudden, the “inconsequential” error margin completely changed the output.
 This is crucial information.
 
-We've seen this behaviour before: in $\frac {1} {x}$,
-the fixed point 1 is the boundary between the convergent and non-convergent regions.
+We've seen this behaviour before.
 The fixed point of $0 in earning interest is the difference between earning money and sinking into debt.
 In the logistic map if the input is less than 0,
 then the output doesn't end up inside [0, 1], instead it flip flops between positive and negative, and approaches infinity.
