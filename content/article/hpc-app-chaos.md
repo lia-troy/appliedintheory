@@ -1,5 +1,5 @@
 ---
-title: "Chaos in HPC apps"
+title: "Chaos in computational simulations"
 date: 2022-11-13T05:11:51+02:00
 
 categories: []
@@ -15,9 +15,12 @@ I first experienced applied chaos theory while writing an app that maps light pa
 
 ![Photo by Jeremy Perkins on Unsplash](/dynamics/black-hole.jpeg)
 
-As I've seen more HPC applications, I've realized that understanding the app's runtime dynamics is critical to performance, and should determine the app's design.
+As I've seen more computational simulations in HPC applications, I've realized that understanding the app's runtime dynamics is critical to performance, and should determine the app's design.
 
 <!--more-->
+
+High performance computing (HPC) is the use of supercomputers and computing clusters to run applications that require massive amounts of computing power.
+Often, these applications are scientific simulations.
 
 ## Links to related posts
 
@@ -29,8 +32,8 @@ I've described chaos and stability in previous posts:
 ## Parallelizing chaotic black hole lensing
 
 One summer, I applied to an [NSF funded initiative]({{< ref "https://necyberteam.org/" >}} "Northeast Cyberteam") that matches computer science students with scientists.
-I was paired with a special relativity professor who was writing an HPC application.
-My job was to create a software framework to parallelize Professor Kling ODEs.
+I was paired with a special relativity professor who was writing a computational simulation.
+My job was to create a software framework to parallelize Professor Kling's ordinary differential equations (ODEs).
 The material of my dynamical systems class showed up front and center in the code design.
 I was shocked. 
 
@@ -61,14 +64,14 @@ In addition, it's intuitive which rays are behaving chaotically -- the ones repe
 
 We saw in the [post on chaos]({{< ref "/article/chaos101.md" >}} "Post: Chaos 101") 
 that even the tiniest rounding error (such as floating point representation) is mathematically problematic in a chaotic system.
-When the light rays orbit the black hole dozens of times, the discretized computations become mathematically meaningless.
+When the light rays orbit the black hole dozens of times, the discretized simulation become mathematically meaningless.
 
 Bumping up the precision to 128bit or even 512bit does not resolve this issue. ANY rounding could create a totally different result in these cases. There's no way to bound the error margin.
 
 ## The GPU branching problem
 
 GPUs were a great choice for parallelization of this HPC app.
-There was one loop that executed the computations, with each step an iteration of the loop.
+There was one loop that executed the simulation, with each step an iteration of the loop.
 GPUs have many cores, batched into sets that all share an instruction set.
 That seemed perfect for our needs -- every iteration was the exact same instruction set.
 
@@ -97,7 +100,7 @@ As a result, the software parallelization framework was specifically designed to
 Fundamentally, the mathematical chaos and the GPU branching problem are two sides of the same coin, each an expression of the same system behaviour.
 
 As a ray becomes more and more chaotic, by design, the step size shrinks quickly.
-Both problems -- the math problem and the GPU branching problem -- can be completely sidestepped by simply quitting computations on any ray whose step size shrinks below a predetermined threshold.
+Both problems -- the math problem and the GPU branching problem -- can be completely sidestepped by simply quitting the simulation on any ray whose step size shrinks below a predetermined threshold.
 These threads would have orders of magnitude more calculations than their neighbours, and in the end, the computation isn't mathematically viable anyway.
 
 Not only was the step size threshold trivial to implement in this design, but the definition of "neighbouring rays" was carefully chosen.
